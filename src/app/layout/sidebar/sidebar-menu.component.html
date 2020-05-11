@@ -1,0 +1,69 @@
+<nav class="mt-2">
+  <ul
+    class="nav nav-pills nav-sidebar flex-column nav-flat"
+    data-widget="treeview"
+    role="menu"
+    data-accordion="false"
+  >
+    <ng-container *ngFor="let item of menuItems">
+      <ng-container
+        *ngTemplateOutlet="sidebarInner; context: { item: item }"
+      ></ng-container>
+    </ng-container>
+  </ul>
+</nav>
+
+<ng-template #sidebarInner let-item="item">
+  <li
+    *ngIf="item.visible"
+    class="nav-item"
+    [class.menu-open]="!item.collapsed"
+    [class.has-treeview]="item.items"
+  >
+    <a
+      *ngIf="item.route && item.route.indexOf('http') != 0"
+      class="nav-link"
+      [routerLink]="item.route"
+      [class.active]="item.active"
+    >
+      <i class="nav-icon {{ item.icon }}"></i>
+      <p>
+        {{ item.label }}
+      </p>
+    </a>
+    <a
+      *ngIf="item.route && item.route.indexOf('http') == 0 && !item.items"
+      class="nav-link"
+      target="_blank"
+      [href]="item.route"
+    >
+      <i class="nav-icon {{ item.icon }}"></i>
+      <p>
+        {{ item.label }}
+      </p>
+    </a>
+    <a
+      *ngIf="!item.route && item.items"
+      class="nav-link"
+      href="javascript:;"
+      [class.active]="item.active"
+      (click)="item.collapsed = !item.collapsed"
+    >
+      <i class="nav-icon {{ item.icon }}"></i>
+      <p>
+        {{ item.label }}
+        <i class="right fas fa-angle-left"></i>
+      </p>
+    </a>
+    <ul *ngIf="item.items" class="nav nav-treeview">
+      <!-- [collapse]="item.collapsed"
+    [isAnimated]="true" -->
+
+      <ng-container *ngFor="let item of item.items">
+        <ng-container
+          *ngTemplateOutlet="sidebarInner; context: { item: item }"
+        ></ng-container>
+      </ng-container>
+    </ul>
+  </li>
+</ng-template>

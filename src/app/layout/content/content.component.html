@@ -1,0 +1,33 @@
+<div class="content-wrapper" [ngStyle]="style" [class]="styleClass">
+  <section
+    *ngIf="
+      headerLabel ||
+      headerDescription ||
+      headerLeftTemplate ||
+      headerRightTemplate
+    "
+    class="content-header"
+  >
+    <div [class.container]="!headerFluid" [class.container-fluid]="headerFluid">
+      <div class="row mb-2">
+        <div
+          [class.col-sm-6]="headerRightTemplate"
+          [class.col-sm-12]="!headerRightTemplate"
+        >
+          <h1 *ngIf="headerLabel || headerDescription" class="d-inline-block">
+            {{ headerLabel }}
+            <small *ngIf="headerDescription">{{ headerDescription }}</small>
+          </h1>
+          <ng-content *ngTemplateOutlet="headerLeftTemplate"></ng-content>
+        </div>
+        <div *ngIf="headerRightTemplate" class="col-sm-6">
+          <ng-content *ngTemplateOutlet="headerRightTemplate"></ng-content>
+        </div>
+      </div>
+    </div>
+  </section>
+  <ng-content *ngTemplateOutlet="afterHeaderTemplate"></ng-content>
+  <section class="content">
+    <ng-content></ng-content>
+  </section>
+</div>

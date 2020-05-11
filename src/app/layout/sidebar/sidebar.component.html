@@ -1,0 +1,13 @@
+<aside
+  class="main-sidebar sidebar-dark-primary elevation-4"
+  [ngStyle]="style"
+  [class]="styleClass"
+>
+  <ng-content></ng-content>
+  <div *ngIf="menuComponent" class="sidebar">
+    <!-- todo -->
+    <!-- user-panel -->
+    <!-- <ng-container *ngComponentOutlet="menuComponent"></ng-container> -->
+  </div>
+</aside>
+<div id="sidebar-overlay" (click)="toggleSidebar()"></div>
