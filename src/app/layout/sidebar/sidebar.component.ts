@@ -22,17 +22,13 @@ export class SidebarComponent implements AfterContentInit {
   @Input() style: any;
   @Input() styleClass: string;
 
-  brandLogoTemplate: TemplateRef<any>;
-  rightTemplate: TemplateRef<any>;
+  userPanelTemplate: TemplateRef<any>;
 
   ngAfterContentInit(): void {
     this.templates.forEach((item) => {
       switch (item.getType()) {
-        case 'brandLogo':
-          this.brandLogoTemplate = item.template;
-          break;
-        case 'right':
-          this.rightTemplate = item.template;
+        case 'userPanel':
+          this.userPanelTemplate = item.template;
           break;
       }
     });

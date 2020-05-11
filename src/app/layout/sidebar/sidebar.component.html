@@ -5,9 +5,8 @@
 >
   <ng-content></ng-content>
   <div *ngIf="menuComponent" class="sidebar">
-    <!-- todo -->
-    <!-- user-panel -->
-    <!-- <ng-container *ngComponentOutlet="menuComponent"></ng-container> -->
+    <ng-container *ngTemplateOutlet="userPanelTemplate"></ng-container>
+    <ng-content select="lte-sidebar-menu"></ng-content>
   </div>
 </aside>
 <div id="sidebar-overlay" (click)="toggleSidebar()"></div>

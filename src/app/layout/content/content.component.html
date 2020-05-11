@@ -18,15 +18,15 @@
             {{ headerLabel }}
             <small *ngIf="headerDescription">{{ headerDescription }}</small>
           </h1>
-          <ng-content *ngTemplateOutlet="headerLeftTemplate"></ng-content>
+          <ng-container *ngTemplateOutlet="headerLeftTemplate"></ng-container>
         </div>
         <div *ngIf="headerRightTemplate" class="col-sm-6">
-          <ng-content *ngTemplateOutlet="headerRightTemplate"></ng-content>
+          <ng-container *ngTemplateOutlet="headerRightTemplate"></ng-container>
         </div>
       </div>
     </div>
   </section>
-  <ng-content *ngTemplateOutlet="afterHeaderTemplate"></ng-content>
+  <ng-container *ngTemplateOutlet="afterHeaderTemplate"></ng-container>
   <section class="content">
     <ng-content></ng-content>
   </section>

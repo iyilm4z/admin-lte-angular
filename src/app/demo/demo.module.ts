@@ -7,6 +7,8 @@ import { MessagesDropdownMenuComponent } from './messages-dropdown-menu/messages
 import { NotificationsDropdownMenuComponent } from './notifications-dropdown-menu/notifications-dropdown-menu.component';
 import { BrandLogoComponent } from './brand-logo/brand-logo.component';
 import { HomeComponent } from './home/home.component';
+import { SharedModule } from '../shared/shared.module';
+import { LayoutModule } from '../layout/layout.module';
 
 const DECLARATIONS_AND_EXPORTS = [
   HeaderLeftComponent,
@@ -18,7 +20,7 @@ const DECLARATIONS_AND_EXPORTS = [
 ];
 
 @NgModule({
-  imports: [CommonModule],
+  imports: [CommonModule, SharedModule, LayoutModule],
   declarations: [...DECLARATIONS_AND_EXPORTS],
   exports: [...DECLARATIONS_AND_EXPORTS],
 })
