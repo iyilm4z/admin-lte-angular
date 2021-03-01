@@ -6,34 +6,17 @@
     "admin-lte-angular": {
       "projectType": "application",
       "schematics": {
-        "@schematics/angular:class": {
-          "skipTests": true
+        "@schematics/angular:application": {
+          "strict": true
         },
         "@schematics/angular:component": {
-          "skipTests": true
-        },
-        "@schematics/angular:directive": {
-          "skipTests": true
-        },
-        "@schematics/angular:guard": {
-          "skipTests": true
-        },
-        "@schematics/angular:interceptor": {
-          "skipTests": true
-        },
-        "@schematics/angular:module": {
-          "skipTests": true
-        },
-        "@schematics/angular:pipe": {
-          "skipTests": true
-        },
-        "@schematics/angular:service": {
+          "style": "css",
           "skipTests": true
         }
       },
       "root": "",
       "sourceRoot": "src",
-      "prefix": "app",
+      "prefix": "lte",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -46,8 +29,8 @@
             "aot": true,
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
-              "node_modules/admin-lte-css-only/css/adminlte.min.css",
               "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
+              "node_modules/admin-lte-css-only/css/adminlte.min.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -63,7 +46,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -71,13 +53,13 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "6kb",
-                  "maximumError": "10kb"
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
                 }
               ]
             }
@@ -100,11 +82,43 @@
             "browserTarget": "admin-lte-angular:build"
           }
         },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "src/test.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.spec.json",
+            "karmaConfig": "karma.conf.js",
+            "assets": ["src/favicon.ico", "src/assets"],
+            "styles": [
+              "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
+              "node_modules/admin-lte-css-only/css/adminlte.min.css",
+              "src/styles.css"
+            ],
+            "scripts": []
+          }
+        },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["tsconfig.app.json"],
+            "tsConfig": [
+              "tsconfig.app.json",
+              "tsconfig.spec.json",
+              "e2e/tsconfig.json"
+            ],
             "exclude": ["**/node_modules/**"]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "e2e/protractor.conf.js",
+            "devServerTarget": "admin-lte-angular:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "admin-lte-angular:serve:production"
+            }
           }
         }
       }
